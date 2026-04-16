@@ -20,6 +20,7 @@ class QuestController
         $quests = $this->questModel->getAll();
 
         $errors = $data['errors'] ?? [];
+        $success = $data['success'] ?? false;
         $old = $data['old'] ?? [
             'title' => '',
             'description' => '',
@@ -61,7 +62,7 @@ class QuestController
             'xp_reward' => $xpReward,
         ]);
 
-        header('Location: /questboard/public/');
+        header('Location: /questboard/public/?success=1');
         exit;
     }
 

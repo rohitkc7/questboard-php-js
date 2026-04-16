@@ -20,8 +20,10 @@ class Router
         foreach ($routes as $route) {
             if ($route['uri'] === $cleanUri && $route['method'] === $method) {
                 extract($data);
-                if (isset($route['controller_method'])) {
-                    $controller->{$route['controller_method']}();
+                if (isset($route['controller_method'], $data['controller'])) {
+                    $controller = $data['controller'];
+                    $methodName = $route['controller_method'];
+                    $controller->$methodName($data);
                 } elseif (isset($route['action'])) {
                     require_once $route['action'];
                 }

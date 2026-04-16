@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 require_once __DIR__ . '/../app/core/Router.php';
@@ -27,7 +26,6 @@ if ($uri === false) {
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
-
 if ($method === 'POST') {
     $questController->store($_POST);
     exit;
@@ -36,6 +34,8 @@ if ($method === 'POST') {
 $routes = require __DIR__ . '/../routes/web.php';
 
 $router = new Router();
+$success = isset($_GET['success']) && $_GET['success'] === '1';
 $router->dispatch($uri, $method, $routes, [
-    'controller' => $questController
+    'controller' => $questController,
+    'success' => $success
 ]);

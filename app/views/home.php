@@ -14,6 +14,13 @@
         <p>Turn your goals into quests.</p>
 
         <h2>Create a Quest</h2>
+        <?php if (!empty($success)): ?>
+        <p style="color:green;">Quest Created successfully</p>
+        <script>
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+        </script>
+        <?php endif; ?>
         <?php if (!empty($error)): ?>
         <p style="color: red;"><?= htmlspecialchars($error) ?></p>
         <?php endif; ?>
@@ -53,11 +60,8 @@
             <br>
             <button type="submit">Create Quest</button>
         </form>
-
-
         <h2>Current Quests</h2>
         <?php
-
         if (empty($quests)) : ?>
         <p>No quests found</p>
         <?php else: ?>
@@ -69,6 +73,10 @@
             <p><strong>Status:</strong> <?= htmlspecialchars($quest['status']) ?></p>
             <p><strong>XP Reward:</strong> <?= htmlspecialchars((string)$quest['xp_reward']) ?></p>
         </article>
+        <form method="POST" action="/questboard/public/?delete=1" style="margin-top:10px;">
+            <input type="hidden" name="id" value="<?= $quest['id'] ?>">
+            <button type="submit">Delete</button>
+        </form>
         <?php endforeach; ?>
         <?php endif; ?>
     </main>
