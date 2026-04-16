@@ -6,6 +6,12 @@ return [
     [
         'uri' => '/',
         'method' => 'GET',
-        'action' => __DIR__ . '/../app/views/home.php'
+        'controller_method' => 'index',
+    ],
+
+    [
+        'uri' => '/',
+        'method' => 'POST',
+        'action' => __DIR__ . '/../app/views/home.php',
     ]
 ];
